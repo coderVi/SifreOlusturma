@@ -22,42 +22,24 @@ namespace OdevSifreOlusturma
             Console.Write("Kaç Karakterli Şifre Oluşturmak istersiniz: ");
             if (!int.TryParse(Console.ReadLine(), out int uzunluk) || uzunluk < 1)
             {
-                Console.WriteLine("Geçersiz şifre uzunluğu girdiniz.");
-                return "";
+                return "Geçersiz şifre uzunluğu girdiniz.";
             }
 
             Console.Write("Kaç Tane Büyük Harf Olacak: ");
-            if (!int.TryParse(Console.ReadLine(), out int buyukHarf) || buyukHarf < 0)
-            {
-                Console.WriteLine("Geçersiz büyük harf sayısı girdiniz.");
-                return "";
-            }
+            int.TryParse(Console.ReadLine(), out int buyukHarf);
 
             Console.Write("Kaç Tane Küçük Harf Olacak: ");
-            if (!int.TryParse(Console.ReadLine(), out int kucukHarf) || kucukHarf < 0)
-            {
-                Console.WriteLine("Geçersiz küçük harf sayısı girdiniz.");
-                return "";
-            }
+            int.TryParse(Console.ReadLine(), out int kucukHarf);
 
             Console.Write("Kaç Tane Rakam Olacak: ");
-            if (!int.TryParse(Console.ReadLine(), out int rakam) || rakam < 0)
-            {
-                Console.WriteLine("Geçersiz rakam sayısı girdiniz.");
-                return "";
-            }
+            int.TryParse(Console.ReadLine(), out int rakam);
 
             Console.Write("Kaç Tane Sembol Olacak: ");
-            if (!int.TryParse(Console.ReadLine(), out int ozel) || ozel < 0)
-            {
-                Console.WriteLine("Geçersiz sembol sayısı girdiniz.");
-                return "";
-            }
+            int.TryParse(Console.ReadLine(), out int ozel);
 
             if (buyukHarf + kucukHarf + rakam + ozel > uzunluk)
             {
-                Console.WriteLine("Toplam karakter sayısı şifre uzunluğundan fazla olamaz.");
-                return "Fazla Giriş";
+                return "Toplam karakter sayısı şifre uzunluğundan fazla olamaz.";
             }
 
             List<char> sifre = new List<char>();
@@ -86,7 +68,7 @@ namespace OdevSifreOlusturma
 
             while (sifre.Count < uzunluk)
             {
-                sifre.Add((char)r.Next(97, 123));
+                sifre.Add((char)r.Next(33, 123));
             }
 
             sifre = sifre.OrderBy(x => r.Next()).ToList(); //Linq aracılığı ile karıştırma
@@ -99,23 +81,8 @@ namespace OdevSifreOlusturma
         {
             Menu();
             string sifre = SifreOlusturma();
-            do
-            {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"Oluşturulan Şifre: ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(sifre);
-                System.Threading.Thread.Sleep(500); // 500 milisaniye bekler (yarım saniye)
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write($"Oluşturulan Şifre: ");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine(sifre);
-                System.Threading.Thread.Sleep(500);
-
-
-            } while (true);
+            Console.Write("Oluşturulan Şifre: {0} " , sifre);
+            Console.Read();
         }
 
     }
